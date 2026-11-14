@@ -1,83 +1,201 @@
 import 'package:flutter/material.dart';
 
 class MyHomePage extends StatelessWidget {
-  MyHomePage({super.key});
+  const MyHomePage({super.key});
 
-  final String npm = "2406000001";
-  final String nama = "Burhan";
-  final String kelas = "PBP A";
-
-  final List<ItemHomepage> items = [
-    ItemHomepage("Lihat Proyek", Icons.folder),
-    ItemHomepage("Tambah Proyek", Icons.add_circle),
-    ItemHomepage("Logout", Icons.logout),
-  ];
+  final String npm = '2506593613';
+  final String nama = 'Nabila Oktavia Ramadhani';
+  final String kelas = 'PBP B';
 
   @override
   Widget build(BuildContext context) {
-    // Scaffold menyediakan struktur visual dasar halaman (AppBar, Body, SnackBar).
-    return Scaffold(
-      // AppBar menampilkan bar bagian atas halaman aplikasi.
-      appBar: AppBar(
-        title: const Text(
-          'MyPortfolio',
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        backgroundColor: Theme.of(context).colorScheme.primary,
+    final colors = Theme.of(context).colorScheme;
+
+    final List<ItemHomepage> viewItems = [
+      ItemHomepage(
+        'Lihat Proyek',
+        Icons.folder_outlined,
+        colors.primary,
+        colors.onPrimary,
+        colors.onPrimary,
       ),
-      // Body halaman utama dengan padding di sekelilingnya.
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            // Baris horizontal untuk menampilkan 3 InfoCard secara sejajar.
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                InfoCard(title: 'NPM', content: npm),
-                InfoCard(title: 'Name', content: nama),
-                InfoCard(title: 'Class', content: kelas),
-              ],
-            ),
+      ItemHomepage(
+        'Lihat Skill',
+        Icons.auto_awesome_outlined,
+        colors.secondary,
+        colors.onSecondary,
+        colors.onSecondary,
+      ),
+      ItemHomepage(
+        'Lihat Pengalaman',
+        Icons.work_outline,
+        colors.tertiary,
+        colors.onTertiary,
+        colors.onTertiary,
+      ),
+    ];
 
-            const SizedBox(height: 16.0),
+    final List<ItemHomepage> addItems = [
+      ItemHomepage(
+        'Tambah Proyek',
+        Icons.add_rounded,
+        colors.primary,
+        colors.onSurface,
+        colors.onPrimary,
+        outlined: true,
+      ),
+      ItemHomepage(
+        'Tambah Skill',
+        Icons.add_rounded,
+        colors.secondary,
+        colors.onSurface,
+        colors.onSecondary,
+        outlined: true,
+      ),
+      ItemHomepage(
+        'Tambah Pengalaman',
+        Icons.add_rounded,
+        colors.tertiary,
+        colors.onSurface,
+        colors.onTertiary,
+        outlined: true,
+      ),
+    ];
 
-            // Bagian tengah: pesan sambutan dan kisi tombol menu portofolio.
-            Center(
-              child: Column(
+    return Scaffold(
+      backgroundColor: colors.surface,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.fromLTRB(22, 16, 22, 28),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.only(top: 16.0),
+                  Expanded(
                     child: Text(
-                      'Selamat datang di MyPortfolio Mobile!',
+                      '~/MyPortfolio',
                       style: TextStyle(
+                        color: colors.primary,
+                        fontSize: 21,
                         fontWeight: FontWeight.bold,
-                        fontSize: 18.0,
                       ),
                     ),
                   ),
-
-                  // GridView menampilkan kartu tombol dalam tata letak kisi 3 kolom.
-                  GridView.count(
-                    primary: true,
-                    padding: const EdgeInsets.all(20),
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
-                    crossAxisCount: 3,
-                    // shrinkWrap agar ukuran kisi menyesuaikan tinggi konten anak.
-                    shrinkWrap: true,
-                    children: items.map((ItemHomepage item) {
-                      return ItemCard(item);
-                    }).toList(),
+                  InkWell(
+                    borderRadius: BorderRadius.circular(29),
+                    onTap: () {
+                      ScaffoldMessenger.of(context)
+                        ..hideCurrentSnackBar()
+                        ..showSnackBar(
+                          const SnackBar(
+                            content: Text(
+                              'Kamu telah menekan tombol Logout!',
+                            ),
+                          ),
+                        );
+                    },
+                    child: CircleAvatar(
+                      radius: 29,
+                      backgroundColor: colors.error.withValues(alpha: 0.18),
+                      child: Icon(Icons.logout_rounded, color: colors.error),
+                    ),
                   ),
                 ],
               ),
-            ),
-          ],
+              const SizedBox(height: 24),
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: colors.surfaceContainer,
+                  borderRadius: BorderRadius.circular(25),
+                ),
+                child: Row(
+                  children: [
+                    CircleAvatar(
+                      radius: 36,
+                      backgroundColor: colors.primary,
+                      child: Text(
+                        nama[0].toUpperCase(),
+                        style: TextStyle(color: colors.onPrimary, fontSize: 27),
+                      ),
+                    ),
+                    const SizedBox(width: 18),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            r"$ whoami",
+                            style: TextStyle(
+                              color: colors.onSurface,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(height: 12),
+                          Wrap(
+                            spacing: 8,
+                            runSpacing: 7,
+                            children: [
+                              InfoCard(title: 'NPM', content: npm),
+                              InfoCard(title: 'Nama', content: nama),
+                              InfoCard(title: 'Kelas', content: kelas),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 26),
+              Text(
+                'Selamat datang di MyPortfolio Mobile!',
+                style: TextStyle(
+                  color: colors.onSurfaceVariant,
+                  fontSize: 15,
+                ),
+              ),
+              const SizedBox(height: 22),
+              Text(
+                'View',
+                style: TextStyle(
+                  color: colors.onSurfaceVariant,
+                  fontSize: 16,
+                ),
+              ),
+              const SizedBox(height: 14),
+              GridView.count(
+                crossAxisCount: 3,
+                crossAxisSpacing: 12,
+                mainAxisSpacing: 12,
+                childAspectRatio: 0.82,
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                children: viewItems.map((item) => ItemCard(item)).toList(),
+              ),
+              const SizedBox(height: 24),
+              Text(
+                'Add',
+                style: TextStyle(
+                  color: colors.onSurfaceVariant,
+                  fontSize: 16,
+                ),
+              ),
+              const SizedBox(height: 14),
+              GridView.count(
+                crossAxisCount: 3,
+                crossAxisSpacing: 12,
+                mainAxisSpacing: 12,
+                childAspectRatio: 0.82,
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                children: addItems.map((item) => ItemCard(item)).toList(),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -85,7 +203,6 @@ class MyHomePage extends StatelessWidget {
 }
 
 class InfoCard extends StatelessWidget {
-  // Kartu informasi yang menampilkan judul (title) dan isi (content).
   final String title;
   final String content;
 
@@ -93,22 +210,37 @@ class InfoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      // Memberikan efek bayangan kartu elevasi 2 unit.
-      elevation: 2.0,
+    final colors = Theme.of(context).colorScheme;
+
+    return Tooltip(
+      message: title,
       child: Container(
-        // Menyesuaikan lebar kartu dengan proporsi layar (dibagi 3.5).
-        width: MediaQuery.of(context).size.width / 3.5,
-        padding: const EdgeInsets.all(16.0),
-        // Menyusun teks title dan content secara vertikal.
+        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 9),
+        decoration: BoxDecoration(
+          color: colors.secondary.withValues(alpha: 0.28),
+          borderRadius: BorderRadius.circular(22),
+        ),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               title,
-              style: const TextStyle(fontWeight: FontWeight.bold),
+              style: TextStyle(
+                color: colors.onSurfaceVariant,
+                fontSize: 10,
+                fontWeight: FontWeight.w500,
+              ),
             ),
-            const SizedBox(height: 8.0),
-            Text(content),
+            const SizedBox(height: 3),
+            Text(
+              content,
+              style: TextStyle(
+                color: colors.onSurface,
+                fontSize: 13,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
           ],
         ),
       ),
@@ -119,8 +251,19 @@ class InfoCard extends StatelessWidget {
 class ItemHomepage {
   final String name;
   final IconData icon;
+  final Color color;
+  final Color textColor;
+  final Color iconColor;
+  final bool outlined;
 
-  ItemHomepage(this.name, this.icon);
+  ItemHomepage(
+    this.name,
+    this.icon,
+    this.color,
+    this.textColor,
+    this.iconColor, {
+    this.outlined = false,
+  });
 }
 
 class ItemCard extends StatelessWidget {
@@ -131,38 +274,57 @@ class ItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      // Menggunakan warna sekunder dari skema tema aplikasi.
-      color: Theme.of(context).colorScheme.secondary,
-      borderRadius: BorderRadius.circular(12),
+      color: item.outlined
+          ? item.color.withValues(alpha: 0.18)
+          : item.color,
+      borderRadius: BorderRadius.circular(27),
       child: InkWell(
-        // Aksi ketika kartu ditekan oleh pengguna.
+        borderRadius: BorderRadius.circular(27),
         onTap: () {
-          // Menampilkan SnackBar dengan pesan interaktif.
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(
-              SnackBar(content: Text("Kamu telah menekan tombol ${item.name}!"))
+              SnackBar(
+                content: Text('Kamu telah menekan tombol ${item.name}!'),
+              ),
             );
         },
         child: Container(
-          padding: const EdgeInsets.all(8),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  item.icon,
-                  color: Colors.white,
-                  size: 30.0,
+          padding: const EdgeInsets.all(15),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(27),
+            border: item.outlined
+                ? Border.all(color: item.color, width: 1.5)
+                : null,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  CircleAvatar(
+                    radius: 21,
+                    backgroundColor: item.outlined
+                        ? item.color
+                        : item.iconColor.withValues(alpha: 0.16),
+                    child: Icon(item.icon, color: item.iconColor, size: 22),
+                  ),
+                  const Spacer(),
+                ],
+              ),
+              const Spacer(),
+              Text(
+                item.name,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  color: item.textColor,
+                  fontSize: 15,
+                  height: 1.25,
+                  fontWeight: FontWeight.w600,
                 ),
-                const Padding(padding: EdgeInsets.all(3)),
-                Text(
-                  item.name,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(color: Colors.white),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
