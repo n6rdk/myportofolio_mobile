@@ -212,37 +212,34 @@ class InfoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
 
-    return Tooltip(
-      message: title,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 9),
-        decoration: BoxDecoration(
-          color: colors.secondary.withValues(alpha: 0.28),
-          borderRadius: BorderRadius.circular(22),
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              title,
-              style: TextStyle(
-                color: colors.onSurfaceVariant,
-                fontSize: 10,
-                fontWeight: FontWeight.w500,
-              ),
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 9),
+      decoration: BoxDecoration(
+        color: colors.secondary.withValues(alpha: 0.28),
+        borderRadius: BorderRadius.circular(22),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: TextStyle(
+              color: colors.onSurfaceVariant,
+              fontSize: 10,
+              fontWeight: FontWeight.w500,
             ),
-            const SizedBox(height: 3),
-            Text(
-              content,
-              style: TextStyle(
-                color: colors.onSurface,
-                fontSize: 13,
-                fontWeight: FontWeight.w600,
-              ),
+          ),
+          const SizedBox(height: 3),
+          Text(
+            content,
+            style: TextStyle(
+              color: colors.onSurface,
+              fontSize: 13,
+              fontWeight: FontWeight.w600,
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
