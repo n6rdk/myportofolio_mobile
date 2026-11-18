@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:myportofolio_mobile/menu.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:myportofolio_mobile/google_text_theme.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,8 +17,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
         brightness: Brightness.dark,
-        textTheme: GoogleFonts.jetBrainsMonoTextTheme(
-          ThemeData.dark().textTheme,
+        textTheme: jetBrainsMonoTextTheme().apply(
+          bodyColor: const Color(0xFFE6F1FF),
+          displayColor: const Color(0xFFE6F1FF),
         ),
         scaffoldBackgroundColor: const Color(0xFF071122),
         colorScheme: const ColorScheme(
