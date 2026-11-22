@@ -33,7 +33,15 @@ myportofolio_mobile/
 ├── ios/
 ├── lib/
 │   ├── main.dart
-│   └── menu.dart
+│   ├── google_text_theme.dart
+│   ├── screens/
+│   │   ├── experience_form.dart
+│   │   ├── menu.dart
+│   │   ├── project_form.dart
+│   │   └── skill_form.dart
+│   └── widgets/
+│       ├── left_drawer.dart
+│       └── project_card.dart
 ├── linux/
 ├── macos/
 ├── test/
@@ -41,9 +49,10 @@ myportofolio_mobile/
 ├── web/
 ├── windows/
 ├── analysis_options.yaml
+├── .metadata
+├── .gitignore
 ├── pubspec.lock
 ├── pubspec.yaml
-├── .gitignore
 └── README.md
 ```
 
@@ -87,7 +96,11 @@ flutter run
 * Mendesign layout, color palette, dan font yang digunakan pada aplikasi ini.
 * Mengatur tema gelap Material 3 dengan color scheme kustom.
 * Menambahkan Google Fonts menggunakan package `google_fonts`.
-* Implementasi Tutorial 8
+* Implementasi Tutorial 8.
+
+### Week 2
+* Implementasi Tutorial 9.
+* Menambah form untuk menambah skill & experience dan menambah navigasi ke form tersebut pada Home dan Drawer
 
 ---
 
@@ -139,6 +152,23 @@ BuildContext adalah objek yang menunjukkan posisi sebuah widget di dalam widget 
 
 Hot reload adalah fitur Flutter yang menerapkan perubahan kode ke dalam VM dan membangun ulang widget tree tanpa menghilangkan state aplikasi, serta tidak menjalankan ulang main() maupun initState(). Sementara itu, hot restart memulai ulang aplikasi sehingga state sebelumnya akan hilang. Hot restart diperlukan ketika perubahan kode tidak dapat diterapkan hanya dengan hot reload, misalnya perubahan pada inisialisasi aplikasi yang perlu menjalankan ulang main() atau initState(). Full restart diperlukan ketika perubahan juga melibatkan kode native seperti Java, Kotlin, Objective-C, atau Swift, karena proses ini membutuhkan kompilasi ulang.
 
+## Tugas 2
+> 1. Jelaskan perbedaan antara Navigator.push(), Navigator.pushReplacement(), dan Navigator.pop(). Metode apa yang digunakan untuk membuka formulir dari kartu aksi? Jelaskan juga bagaimana opsi Home di drawer membawa pengguna kembali ke halaman utama.
+
+`Navigator.push()` menambahkan route baru di atas stack, sedangkan `Navigator.pushReplacement()` mengganti route saat ini dengan route baru. `Navigator.pop()` menutup route paling atas dan kembali ke halaman sebelumnya. Card **Add Skills** membuka formulir dengan `Navigator.push()`. Opsi **Home** di drawer menggunakan `Navigator.pushReplacement()` untuk mengganti halaman formulir dengan halaman utama.
+
+> 2. Bagaimana susunan Scaffold, AppBar, dan Drawer membantu menjaga struktur halaman tetap konsisten? Berikan satu contoh penggunaan warna tema portofolio di lebih dari satu halaman.
+
+`Scaffold` menjadi kerangka halaman dan menempatkan `AppBar`, konten, serta `Drawer` dalam susunan yang konsisten. `AppBar` menampilkan judul halaman, sementara `Drawer` menyediakan navigasi yang bisa dibuka dari Home maupun form. Contohnya penggunaan warna tema di lebih dari satu halaman, yaitu judul Home dan tombol Save di form Skill sama-sama memakai warna primary dari tema. Karena warnanya berasal dari `Theme.of(context).colorScheme`, tampilan antarhalaman tetap konsisten.
+
+> 3. Mengapa tata letak tersebut dipilih untuk formulir? Jelaskan peran widget pengatur jarak dan widget penggulir ketika ruang layar terbatas.
+
+Tata letak widget tersebut dipilih agar input formulir tersusun rapi dari atas ke bawah. `Padding` memberi jarak di antara tiap field, sedangkan `SingleChildScrollView` memungkinkan formulir digulir saat layar sempit atau keyboard terbuka. Jadi, semua input dan tombol tetap bisa dijangkau.
+
+> 4. Apa peran `GlobalKey<FormState>`, `validator`, dan `validate()` saat tombol Simpan ditekan? Berikan satu contoh nilai yang ditolak oleh validasi dan jelaskan mengapa memilih jenis input atau papan ketik saja belum cukup.
+
+`GlobalKey<FormState>` memberi akses ke state `Form`, `validator` memeriksa tiap input, dan `validate()` menjalankan semua pemeriksaan saat tombol Simpan ditekan. Jika ada yang gagal, pesan kesalahan muncul dan dialog ringkasan tidak muncul. Contohnya, nama experience yang hanya berisi spasi ditolak karena setelah trim(), nilainya kosong. Jenis papan ketik hanya membantu memasukkan format tertentu, ia tidak menjamin nilainya valid, jadi validator tetap diperlukan.
+
 ---
 
 # AI Disclosure
@@ -149,6 +179,7 @@ Tools AI yang digunakan: Claude
 
 Log penggunaan AI:
 <br>https://claude.ai/share/5e5be8c2-3b3c-431c-ae62-f9ede7904555
+<br>https://claude.ai/share/85921b8c-19d4-499e-a8a3-5aec8a4c3074
 
 ## Peran AI
 
@@ -158,6 +189,9 @@ Claude membantu beberapa hal berikut:
 * Membantu memahami pengaturan font dan `TextTheme`.
 * Membantu debugging masalah instalasi `google_fonts` dan ketidakcocokan tipe `TextTheme`.
 * Membantu membuat kerangka dan sebagian isi `README.md`.
+* Menganalisis popup error Gradle dari Java language server di VS Code.
+* Memberikan saran alur navigasi antara kartu aksi di halaman Home dan drawer.
+* Menjelaskan penggunaan `List` di Dart untuk merepresentasikan array.
 
 ## Keterbatasan AI
 
