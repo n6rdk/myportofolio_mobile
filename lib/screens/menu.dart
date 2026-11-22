@@ -1,4 +1,5 @@
 import 'package:material_ui/material_ui.dart';
+import 'package:myportofolio_mobile/screens/skill_form.dart';
 import 'package:myportofolio_mobile/widgets/left_drawer.dart';
 import 'package:myportofolio_mobile/widgets/project_card.dart';
 
@@ -15,21 +16,21 @@ class MyHomePage extends StatelessWidget {
 
     final List<ItemHomepage> viewItems = [
       ItemHomepage(
-        'Lihat Proyek',
+        'View Projects',
         Icons.folder_outlined,
         colors.primary,
         colors.onPrimary,
         colors.onPrimary,
       ),
       ItemHomepage(
-        'Lihat Skill',
+        'View Skills',
         Icons.auto_awesome_outlined,
         colors.secondary,
         colors.onSecondary,
         colors.onSecondary,
       ),
       ItemHomepage(
-        'Lihat Pengalaman',
+        'View Experiences',
         Icons.work_outline,
         colors.tertiary,
         colors.onTertiary,
@@ -39,7 +40,7 @@ class MyHomePage extends StatelessWidget {
 
     final List<ItemHomepage> addItems = [
       ItemHomepage(
-        'Tambah Proyek',
+        'Add Projects',
         Icons.add_rounded,
         colors.primary,
         colors.onSurface,
@@ -47,15 +48,21 @@ class MyHomePage extends StatelessWidget {
         outlined: true,
       ),
       ItemHomepage(
-        'Tambah Skill',
+        'Add Skills',
         Icons.add_rounded,
         colors.secondary,
         colors.onSurface,
         colors.onSecondary,
         outlined: true,
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const SkillFormPage()),
+          );
+        },
       ),
       ItemHomepage(
-        'Tambah Pengalaman',
+        'Add Experiences',
         Icons.add_rounded,
         colors.tertiary,
         colors.onSurface,
@@ -261,6 +268,7 @@ class ItemHomepage {
   final Color textColor;
   final Color iconColor;
   final bool outlined;
+  final VoidCallback? onTap;
 
   ItemHomepage(
     this.name,
@@ -269,5 +277,6 @@ class ItemHomepage {
     this.textColor,
     this.iconColor, {
     this.outlined = false,
+    this.onTap,
   });
 }

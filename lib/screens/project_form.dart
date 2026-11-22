@@ -36,8 +36,8 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
             'Add Project Form',
           ),
         ),
-        backgroundColor: Colors.indigo,
-        foregroundColor: Colors.white,
+        backgroundColor: colors.surface,
+        foregroundColor: colors.onSurface,
       ),
       drawer: const LeftDrawer(),
       body: Form(
@@ -51,10 +51,10 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
                   decoration: InputDecoration(
-                    hintText: "Nama Proyek",
-                    labelText: "Nama Proyek",
+                    hintText: "Project Name",
+                    labelText: "Project Name",
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5.0),
+                      borderRadius: BorderRadius.circular(27),
                     ),
                   ),
                   onChanged: (String? value) {
@@ -64,7 +64,7 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
                   },
                   validator: (String? value) {
                     if (value == null || value.trim().isEmpty) {
-                      return "Nama proyek tidak boleh kosong!";
+                      return "Project name cannot be empty!";
                     }
                     return null;
                   },
@@ -77,10 +77,10 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
                 child: TextFormField(
                   maxLines: 5,
                   decoration: InputDecoration(
-                    hintText: "Deskripsi Proyek",
-                    labelText: "Deskripsi Proyek",
+                    hintText: "Project Description",
+                    labelText: "Project Description",
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5.0),
+                      borderRadius: BorderRadius.circular(27),
                     ),
                   ),
                   onChanged: (String? value) {
@@ -90,7 +90,7 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
                   },
                   validator: (String? value) {
                     if (value == null || value.trim().isEmpty) {
-                      return "Deskripsi proyek tidak boleh kosong!";
+                      return "Project description cannot be empty!";
                     }
                     return null;
                   },
@@ -102,9 +102,9 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
                 padding: const EdgeInsets.all(8.0),
                 child: DropdownButtonFormField<String>(
                   decoration: InputDecoration(
-                    labelText: "Kategori Proyek",
+                    labelText: "Category",
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5.0),
+                      borderRadius: BorderRadius.circular(27),
                     ),
                   ),
                   initialValue: _category,
@@ -127,10 +127,10 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
                   decoration: InputDecoration(
-                    hintText: "Contoh: Flutter, Django, Figma",
-                    labelText: "Teknologi yang Digunakan",
+                    hintText: "e.g. Flutter, Django, Figma",
+                    labelText: "Technologies Used",
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5.0),
+                      borderRadius: BorderRadius.circular(27),
                     ),
                   ),
                   onChanged: (String? value) {
@@ -146,10 +146,10 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
                   decoration: InputDecoration(
-                    hintText: "URL Proyek (opsional)",
-                    labelText: "Tautan Proyek",
+                    hintText: "Project URL (optional)",
+                    labelText: "Project Link",
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5.0),
+                      borderRadius: BorderRadius.circular(27),
                     ),
                   ),
                   onChanged: (String? value) {
@@ -168,7 +168,7 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
                   child: ElevatedButton(
                     style: ButtonStyle(
                       backgroundColor:
-                          WidgetStateProperty.all(Colors.indigo),
+                          WidgetStateProperty.all(colors.primary),
                     ),
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
@@ -176,16 +176,16 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
                           context: context,
                           builder: (context) {
                             return AlertDialog(
-                              title: const Text('Proyek berhasil ditambahkan!'),
+                              title: const Text('Project added successfully!'),
                                 content: SingleChildScrollView(
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      Text('Nama Proyek: $_projectName'),
-                                      Text('Deskripsi: $_description'),
-                                      Text('Kategori: $_category'),
-                                      Text('Teknologi: $_technologies'),
-                                      Text('Tautan: $_projectLink'),
+                                      Text('Project Name: $_projectName'),
+                                      Text('Description: $_description'),
+                                      Text('Category: $_category'),
+                                      Text('Tech Stack: $_technologies'),
+                                      Text('Link: $_projectLink'),
                                     ],
                                   ),
                                 ),
