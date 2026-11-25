@@ -1,7 +1,10 @@
-import 'package:material_ui/material_ui.dart';
+import 'package:flutter/material.dart';
 import 'package:myportofolio_mobile/screens/skill_form.dart';
+import 'package:myportofolio_mobile/screens/project_list_screen.dart';
 import 'package:myportofolio_mobile/widgets/left_drawer.dart';
 import 'package:myportofolio_mobile/widgets/project_card.dart';
+import 'package:myportofolio_mobile/services/auth_state.dart';
+import 'package:provider/provider.dart';
 
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
@@ -99,15 +102,15 @@ class MyHomePage extends StatelessWidget {
                   ),
                   InkWell(
                     borderRadius: BorderRadius.circular(29),
-                    onTap: () {
+                    onTap: () async {
+                      if (context.read<AuthState>().isLoggedIn) {
+                        await context.read<AuthState>().logout();
+                      }
+                      if (!context.mounted) return;
                       ScaffoldMessenger.of(context)
                         ..hideCurrentSnackBar()
                         ..showSnackBar(
-                          const SnackBar(
-                            content: Text(
-                              'Kamu telah menekan tombol Logout!',
-                            ),
-                          ),
+                          const SnackBar(content: Text('You have logged out.')),
                         );
                     },
                     child: CircleAvatar(
@@ -168,18 +171,12 @@ class MyHomePage extends StatelessWidget {
               const SizedBox(height: 26),
               Text(
                 'Selamat datang di MyPortfolio Mobile!',
-                style: TextStyle(
-                  color: colors.onSurfaceVariant,
-                  fontSize: 15,
-                ),
+                style: TextStyle(color: colors.onSurfaceVariant, fontSize: 15),
               ),
               const SizedBox(height: 22),
               Text(
                 'View',
-                style: TextStyle(
-                  color: colors.onSurfaceVariant,
-                  fontSize: 16,
-                ),
+                style: TextStyle(color: colors.onSurfaceVariant, fontSize: 16),
               ),
               const SizedBox(height: 14),
               GridView.count(
@@ -194,10 +191,7 @@ class MyHomePage extends StatelessWidget {
               const SizedBox(height: 24),
               Text(
                 'Add',
-                style: TextStyle(
-                  color: colors.onSurfaceVariant,
-                  fontSize: 16,
-                ),
+                style: TextStyle(color: colors.onSurfaceVariant, fontSize: 16),
               ),
               const SizedBox(height: 14),
               GridView.count(

@@ -1,4 +1,4 @@
-import 'package:material_ui/material_ui.dart';
+import 'package:flutter/material.dart';
 import 'package:myportofolio_mobile/widgets/left_drawer.dart';
 
 class ExperienceFormPage extends StatefulWidget {
@@ -33,11 +33,7 @@ class _ExperienceFormPageState extends State<ExperienceFormPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Center(
-          child: Text(
-            'Add Experience Form',
-          ),
-        ),
+        title: const Center(child: Text('Add Experience Form')),
         backgroundColor: colors.surface,
         foregroundColor: colors.onSurface,
       ),
@@ -111,10 +107,12 @@ class _ExperienceFormPageState extends State<ExperienceFormPage> {
                   ),
                   initialValue: _category,
                   items: _categories
-                      .map((category) => DropdownMenuItem(
-                            value: category,
-                            child: Text(category),
-                          ))
+                      .map(
+                        (category) => DropdownMenuItem(
+                          value: category,
+                          child: Text(category),
+                        ),
+                      )
                       .toList(),
                   onChanged: (String? newValue) {
                     setState(() {
@@ -183,8 +181,7 @@ class _ExperienceFormPageState extends State<ExperienceFormPage> {
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
                     style: ButtonStyle(
-                      backgroundColor:
-                          WidgetStateProperty.all(colors.primary),
+                      backgroundColor: WidgetStateProperty.all(colors.primary),
                     ),
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
@@ -192,21 +189,23 @@ class _ExperienceFormPageState extends State<ExperienceFormPage> {
                           context: context,
                           builder: (context) {
                             return AlertDialog(
-                              title: const Text('Experience added successfully!'),
-                                content: SingleChildScrollView(
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text('Experience Name: $_ExperienceName'),
-                                      Text('Description: $_description'),
-                                      Text('Category: $_category'),
-                                      Text('Year Started: $_yearStarted'),
-                                      Text(
-                                        'Year Ended: ${_yearEnded.isEmpty ? "Ongoing" : _yearEnded}',
-                                      ),
-                                    ],
-                                  ),
+                              title: const Text(
+                                'Experience added successfully!',
+                              ),
+                              content: SingleChildScrollView(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text('Experience Name: $_ExperienceName'),
+                                    Text('Description: $_description'),
+                                    Text('Category: $_category'),
+                                    Text('Year Started: $_yearStarted'),
+                                    Text(
+                                      'Year Ended: ${_yearEnded.isEmpty ? "Ongoing" : _yearEnded}',
+                                    ),
+                                  ],
                                 ),
+                              ),
                               actions: [
                                 TextButton(
                                   child: const Text('OK'),

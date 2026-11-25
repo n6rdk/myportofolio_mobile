@@ -1,4 +1,4 @@
-import 'package:material_ui/material_ui.dart';
+import 'package:flutter/material.dart';
 import 'package:myportofolio_mobile/widgets/left_drawer.dart';
 
 class SkillFormPage extends StatefulWidget {
@@ -77,7 +77,9 @@ class _SkillFormPageState extends State<SkillFormPage> {
                     }
 
                     final entries = value.split(',');
-                    if (entries.any((technology) => technology.trim().isEmpty)) {
+                    if (entries.any(
+                      (technology) => technology.trim().isEmpty,
+                    )) {
                       return "Use commas between technologies; don't leave an item empty.";
                     }
                     return null;
@@ -95,8 +97,9 @@ class _SkillFormPageState extends State<SkillFormPage> {
                     onPressed: () {
                       if (!_formKey.currentState!.validate()) return;
 
-                      final List<String> techStack =
-                          _parseTechStack(_techStackInput);
+                      final List<String> techStack = _parseTechStack(
+                        _techStackInput,
+                      );
                       showDialog<void>(
                         context: context,
                         builder: (dialogContext) => AlertDialog(
@@ -108,7 +111,9 @@ class _SkillFormPageState extends State<SkillFormPage> {
                               Text('Category: ${_category.trim()}'),
                               const SizedBox(height: 8),
                               const Text('Tech Stack:'),
-                              ...techStack.map((technology) => Text('- $technology')),
+                              ...techStack.map(
+                                (technology) => Text('- $technology'),
+                              ),
                             ],
                           ),
                           actions: [
