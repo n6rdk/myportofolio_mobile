@@ -1,5 +1,5 @@
 import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// TextTheme JetBrains Mono (versi material_ui) berbasis tipografi Material 3 gelap.
 TextTheme jetBrainsMonoTextTheme() {

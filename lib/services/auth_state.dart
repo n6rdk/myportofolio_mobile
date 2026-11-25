@@ -22,7 +22,8 @@ class AuthState extends ChangeNotifier {
 
     try {
       await _apiClient.logout(token: current);
-    } on ApiException {
+    } on ApiException catch (error) {
+      debugPrint('Logout request failed (${error.statusCode}).');
     } finally {
       _token = null;
       notifyListeners();

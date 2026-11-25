@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:myportofolio_mobile/widgets/left_drawer.dart';
 
 class ExperienceFormPage extends StatefulWidget {
@@ -11,7 +11,7 @@ class ExperienceFormPage extends StatefulWidget {
 class _ExperienceFormPageState extends State<ExperienceFormPage> {
   final _formKey = GlobalKey<FormState>();
 
-  String _ExperienceName = "";
+  String _experienceName = "";
   String _description = "";
   String _category = "Volunteer"; // default
   String _yearStarted = "";
@@ -57,7 +57,7 @@ class _ExperienceFormPageState extends State<ExperienceFormPage> {
                   ),
                   onChanged: (String? value) {
                     setState(() {
-                      _ExperienceName = value!;
+                      _experienceName = value!;
                     });
                   },
                   validator: (String? value) {
@@ -196,7 +196,7 @@ class _ExperienceFormPageState extends State<ExperienceFormPage> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text('Experience Name: $_ExperienceName'),
+                                    Text('Experience Name: $_experienceName'),
                                     Text('Description: $_description'),
                                     Text('Category: $_category'),
                                     Text('Year Started: $_yearStarted'),
